@@ -1,0 +1,225 @@
+﻿>>>Python Package: It is bunch of modules with __init__.py file. If the directory which has python files without __intit__.py is not a package.
+*When a package is imported only the functions and classes that present in the __intit__.py are directly visible.
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+>>>___name___ == '__main__'
+*In python when a program runs the __name__ is initialized with the __main__.
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+>>>Python Module: It is nothing but the .py file which contaiins the program code.
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+*args : the parameters are passed like tuple
+**Kwargs : the parameters are passed like dictionary.
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+>>>input/raw_input:
+*input() and raw_input() is present in 2.x, raw_input() is replaced by input in 3.x
+*input in 2.x checks the gives the input whatever user has given as string after evaluation whether is correct syntactically or not. where as raw_input just gives the user inputs as string.
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+>>>eval:
+*Evaluates the passed string as a Python expression and returns the result. For example, eval("1 + 1") interprets and executes the expression "1 + 1" and returns the result (2)
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+*args : the parameters are passed like tuple
+ex : def excs(*args):
+		print(args)
+li = [0,1,12,3,4]
+excs(li,li,li)
+output : ([0, 1, 12, 3, 4], [0, 1, 12, 3, 4], [0, 1, 12, 3, 4])
+​
+**Kwargs : the parameters are passed like dictionary.
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+>>>Decorators
+*Adding extra functionality to the function.
+example:
+def smart_divide(func):
+   def inner(a,b):
+      print("I am going to divide",a,"and",b)
+      if b == 0:
+         print("Whoops! cannot divide")
+         return
+
+      return func(a,b)
+   return inner
+
+@smart_divide
+def divide(a,b):
+    return a/b
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+>>>regular expression
+*findall() : it checks the string in the given parameter and returns strings how many times it encounters.
+*search() : it checks the string occurance in the given parameter and returns the first occurance index. <var>.start() gives the output.
+*split() : it splits based on the character given.
+*sub() : it used to substitute the values in the given string. eg == re.subn(<char>,<subchar>,<str>,<no. of times need to be replaced>)
+*subn() : it used to substitute and returnns the total number of places it substituted.
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+>>>Exception Handling
+*try and except blocks. Code is written in try block and exception handles writtenin except block
+*the keyword sys.exc_info()[0] will give the inbuilt exception handling in python.
+*Finally it will print everything whatever it has inside it. -------------------------------------------------------------------------------------------------------------------------------------------------------
+>>>lambda
+lambda arguments: expression
+g = lambda x: x*x*x 
+print(g(5)) 
+
+output = 125
+*No return statement is needed.
+
+>>>filetr
+*The filter() function in Python takes in a function and a list as arguments.Filter out all the elements of a sequence for which the function returns True.
+li = [5, 7, 22, 97, 54, 62, 77, 23, 73, 61] 
+final_list = list(filter(lambda x: (x%2 != 0) , li)) 
+print(final_list)
+
+output:[5, 7, 97, 77, 23, 73, 61]
+
+>>>map
+*It takes two arg one is method/Lambda function and other is list. The output is the return values of function.
+li = [5, 7, 22, 97, 54, 62, 77, 23, 73, 61] 
+final_list = list(map(lambda x: x*2 , li)) 
+print(final_list) 
+Output:
+
+[10, 14, 44, 194, 108, 124, 154, 46, 146, 122]
+
+>>>reduce
+*It takes two arguments one is method/Lambda function and other is list. The output is scalar obtained from the method/Lambda.
+from functools import reduce
+li = [5, 8, 10, 20, 50, 100] 
+sum = reduce((lambda x, y: x + y), li) 
+print (sum) 
+
+Output:
+
+193
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+>>>Garbage Collection
+*Python uses two methods
+*before 2.x there was nly reference counting and GC came into picture from 2.x.
+Reference counting : Reference counting works by counting the number of times an object is referenced by other objects in the system.
+Garbage collection : it is invoked When the number of allocations minus the number of deallocations are greater than the threshold number, the garbage collector is run.
+
+We can disable the collector if you are sure your program does not create reference cycles.
+Reference Cycles: A reference cycle is created when the object is referenced to itself
+
+*gc.get_threshold() will give the threshold value after which the gc will run to remove the garbage values [700,10,10]
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+>>>Multithreading
+*Ability of a processor to execute multiple threads concurrently by sharing the same heap space.
+*In single-core CPU, it is achieved using frequent switching between threads. This is termed as context switching.
+import threading
+t1 = threading.Thread(target=<function>, args=(10,))
+to start thread t1.start().
+to wait untill thread is completed t1.join()
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+>>>Multiprocessing
+*Ability to run the code in different process at the same time.
+*it has methods similar to multithreading start(),join(),is_alive(),TerminateProcess() etc.
+from multiprocessing import Process
+
+def f(name):
+    print('hello', name)
+
+if __name__ == '__main__':
+    p = Process(target=f, args=('bob',))
+    p.start()
+    p.join()
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+>>>There are four collection data types in the Python programming language:
+
+	1.List is a collection which is ordered and changeable. Allows duplicate members. <l=[] or l =list(())>
+	2.Tuple is a collection which is ordered and unchangeable. Allows duplicate members.<l=()>. index(),count() methods x%2
+	3.Set is a collection which is unordered and unindexed. No duplicate members.<l={}>
+	4.Dictionary is a collection which is ordered, changeable and indexed. No duplicate members.
+
+
+==>List:
+		?remove() : removes the specified item from list.
+		?pop() : removes particular index if specified or it will remove the last element from list.
+		?del : removes the particular elementfrom the list. It is used to remove entire list with syntax(del <listname>)
+		?inser syntax <l=l.insert(<index>,<value>)>
+		
+==>Dictionary:
+			  ?To print the values of dictionary <for x in <dicname>.values()>	
+			  ?To print the key and values <for x, y in thisdict.items():>
+			  ?The popitem() method removes the last inserted item (in versions before 3.7, a random item is removed instead)
+			  ?del is used to remove dictionary completely but clear is used to flush the data inside dictionary.
+------------------------------------------------------------------------------------------------------------------------------------------------------->>>Handling file system			  
+*my_file=open("D:\\new_dir\\multiplelines.txt","r")
+ my_file.read()
+*with open("C:\\Users\\Rashmi\\Desktop\\Resume\\newfile.txt",mode="r",encoding="utf-8") as f:
+    line=f.readlines()
+    for i in line:
+        print(i)
+*modes
+	a=append at the EOL, r=read only, w=write, x=exlusive mode, it fails if already exists, b=binary mode,t=text mode, + = combining mupltiple modes
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+>>>Global variables:
+x = 5
+
+def foo():
+    global x
+    x = 10
+    print("local x:", x)
+
+foo()
+print("global x:", x)
+
+Output:
+local x: 10
+global x: 10
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+>>>Methods and functions
+*Simply, function and method both look similar as they perform in almost similar way, but the key difference is the method is defined in a class and class object is needed to invoke or use method.
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+Loops
+>>>The elif keyword is pythons way of saying "if the previous conditions were not true, then try this condition"
+>>>Short hand if syntax or single line if  <if a > b: print("a is greater than b")>
+>>>Short hand if else syntax or one line if else <print("A") if a > b else print("B")>
+
+Terniary operator:
+* x = 10
+y = 20
+a =x if(x<y) else y
+
+>>>Constructors
+def __init__(self):
+*The task of constructors is to initialize(assign values) to the data members of the class when an object of class is created
+Types of constructors : 1)default constructor 2)parameterized constructor(parameter will be passed through class).
+
+>>>Destructors
+*Destructors are called when an object gets destroyed. In Python, destructors are not needed as much needed in C++ because Python has a garbage collector that handles memory management automatically.
+class Employee: 
+def __del__(self):  
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+>>>zip()
+*The purpose of zip() is to map the similar index of multiple containers so that they can be used just using as single entity.
+name = [ "Manjeet", "Nikhil", "Shambhavi", "Astha" ] 
+roll_no = [ 4, 1, 3, 2 ] 
+marks = [ 40, 50, 60, 70 ] 
+mapped = zip(name, roll_no, marks)
+mapped: {('Shambhavi', 3, 60), ('Astha', 2, 70),
+('Manjeet', 4, 40), ('Nikhil', 1, 50)}
+unzip:
+*Unzipping means converting the zipped values back to the individual self as they were. This is done with the help of “*” operator.
+namz, roll_noz, marksz = zip(*mapped)
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+>>>Magic Methods(link == https://www.python-course.eu/python3_magic_methods.php)
+*The methods will be invoked automatically when the class object is created.
+*Magic methods methods are sometimes called dunder methods.
+eg: __init__,__add__,__sum__ etc.,
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+>>>xrange and range:
+xrange and range are the exact same in terms of functionality. They both provide a way to generate a list of integers for you to use, however you please. The only difference is that range returns a Python list object and xrange returns an xrange object.
+----------------------------------
+>>>try and except:
+*It also has else and finally block. The else block is executed when there is no error encountered.
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+>>>Removing duplicates of list
+*typecast with set and then typecast with list
+*typecast with dict.fromkeys() and typecast with list.
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+>>>printing a string in reverse order
+txt = "Hello World"[::-1]
+print(txt)
+the first parameter is from which index to start and middle parameter is till where it should go and third parameter is step.
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+>>>Python Docstrings:
+*A docstring is a documentation string that we use to explain what a construct does. We place it as the first thing under a function, class, or a method, to describe what it does. 
+-------------------------------------------------------------------------------------------------------------------------------------------------------
