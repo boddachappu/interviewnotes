@@ -1,0 +1,17 @@
+class One:
+  __pri = 'Vinod' #private
+  def __init__(self,name,sal):
+    self._name = name #protected
+    self.sal = sal #public
+    
+class Two(One):
+  def sam(self):
+    return self._name,self.sal
+    
+ob = Two('Vinod',1)
+print(ob._name,ob.sal)
+try:
+  print(ob.__pri)
+except:
+  print(ob._One__pri) #accessing private variable
+  print('Unable to access the private variable')
