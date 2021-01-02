@@ -1,0 +1,25 @@
+Ttorial: https://www.youtube.com/watch?v=T_Fe4IaG0KU
+
+Angular we shold start with version 2 as it is similar to the latest versions.
+
+Angular follows the MVC architectre.
+
+In order to work with Agular we need nodejs to be installed and with that we canm install anglar cli
+
+Once nodejs is instal se below command to install angular cli
+
+npm install -g @angular/cli
+
+Angular has mltiple inbuilt packages like api, forms etc.,
+
+To start new application se below command:
+ng new <app name>
+
+To run the application se below command:go to app dir.
+np serve --open
+
+once the app is create it will create multiple folders and files in the directory and below are the few important files:
+package.json: it will have the dependencies of the project and dev dependencies wjich can used to install using cli.
+angular.json:
+style.css: if we write any css here it will be applicable to entire project. If we want particlar css to be applied on the component then component css needs to changed.
+
