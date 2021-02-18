@@ -1,0 +1,86 @@
+l = [[1,2,3],[4,5,6],[7,8,9]]
+# l2=[]
+# l3 = []
+# l4 = []
+# final_l = []
+#
+# for i in range(len(l)):
+#     l2.append(l[i][0])
+#
+# for i in range(len(l)):
+#     l3.append(l[i][1])
+#
+# for i in range(len(l)):
+#     l4.append(l[i][2])
+#
+# final_l = [l2,l3,l4]
+# print(final_l)
+
+print(list(map(lambda x,y,z:[x,y,z],l[0],l[1],l[2])))
+
+output:
+[[1, 4, 7], [2, 5, 8], [3, 6, 9]]
+
+
+2) Count the number of instances created to the class:
+
+class Vinod():
+    __count = 0
+    def __init__(self):
+        Vinod.__count += 1
+
+ob = Vinod()
+ob1 = Vinod()
+
+print(ob1._Vinod__count)
+
+
+
+3) merging two dictionaries:
+d = {'a':2}
+d2 = {'b':3}
+d.update(d2)
+print(d)
+
+4)Methods of list[diff between append and extend]
+l = [1,2,3,4]
+l.append(5)
+print(l)
+l.pop(1)
+print(l)
+
+
+5) To get the first 3 most repeated words in paragraph,
+
+para = 'Hi I am I am Vinod I '
+import re
+para = para.split(' ')
+print(para)
+
+from collections import Counter
+
+res=((Counter(para)).most_common(3))
+print(res)
+
+6) Sorting the list withoutusing sort method:
+
+l = [1,8,2,45,3,4]
+
+for i in range(len(l)):
+    for j in range(i+1, len(l)):
+        if l[i] > l[j]:
+            l[i], l[j] = l[j], l[i]
+
+print(l)
+
+
+7)# Sort a given array of strings as per there length in non-decreasing order
+
+# for ex:    array = ["My", "Name", "is", "john"]
+
+# Ex:2 : ["am", "Technician", "i"]
+
+a = ["My", "Name", "is", "john"]
+
+a.sort(key=lambda a: len(a))
+print(a)

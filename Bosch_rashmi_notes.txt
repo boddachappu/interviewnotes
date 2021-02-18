@@ -1,0 +1,89 @@
+1) What packages do you use?
+2) Whats slicing ?
+3) Reverse a string
+4) Common element in 2 lists
+	#Using sets:
+	l1 = [1,8,2,45,3,4]
+	l2 = [1,8,2,6,3,0]
+	print(set(l1).intersection(set(l2)))
+
+	#Using set with operators
+	l1 = [1,8,2,45,3,4]
+	l2 = [1,8,2,4,3,0]
+	print(set(l1) & (set(l2)))
+
+	#Using list comprehension
+	l1 = [1,8,2,45,3,4]
+	l2 = [1,8,2,6,3,0]
+	print([x for x in l1 if x in l2])
+
+  
+5) Get unique values from a list
+ 	#Using set
+	l2 = [1,8,2,6,6,0]
+	print(set(l2))
+
+	#using fromkeys
+	l2 = [1,8,2,4,3,3]
+	d = dict.fromkeys(l2) #d = {i:None for i in t}
+
+	#using fromkeys ordered
+	t = (9, 8, 7)
+	from collections import OrderedDict
+	d = OrderedDict.fromkeys(t)
+
+	#using pandas
+	l2 = [1,8,2,4,3,9,3]
+	import pandas as pd
+	print(pd.Series(l2).drop_duplicates().tolist())
+
+6) Get repeating values from a list
+
+l1 = [1,2,3,1,2,2,3,4,5]
+
+res = []
+for i in range(len(l1)):
+    for j in range(i+1, len(l1)):
+        if l1[i] == l1[j]:
+            res.append(l1[i])
+print(set(res))
+
+
+res2 = list(filter(lambda x: l1.count(x)>1, l1))
+print(set(res2))
+
+7) Set operations
+
+	l1 = [1,2,2,3,4,5]
+l2 = [4,5,6,6,7,8]
+a = set(l1)
+b = set(l2)
+print(a&b)
+print(a.intersection(b))
+print(a|b)
+print(a.union(b))
+print(a-b)
+print(a.difference(b))
+print(a)
+print(a.difference_update(b))
+print(a)
+print((a|b)-(a&b))
+
+Op:
+
+{4, 5}
+{4, 5}
+{1, 2, 3, 4, 5, 6, 7, 8}
+{1, 2, 3, 4, 5, 6, 7, 8}
+{1, 2, 3}
+{1, 2, 3}
+{1, 2, 3, 4, 5}
+None
+{1, 2, 3}
+{1, 2, 3, 4, 5, 6, 7, 8}
+
+8) Release process
+
+
+
+	
