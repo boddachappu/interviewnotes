@@ -1,0 +1,206 @@
+SOLID PRINCIPLEs
+set of design principles in oops for making code readable, maintainable and testable
+S - Single-responsibility Principle
+O - Open-closed Principle
+L - Liskov Substitution Principle
+I - Interface Segregation Principle
+D - Dependency Inversion Principle
+
+
+SRP:
+According to SRP a class should have single responsibility. This means that there is only one reason that class needs to be changed.
+Incase we do not follow this and make a class with multiple responsibilities this scenario might occur.
+Incase if we are not following SRP if suppose the user is using one functionality in a class and it had one more functionality which is changed. 
+Still user has to import those updated module irrespective whether user is using or not. This would have been eliminated using SRP.
+eg:
+validate
+save
+
+
+
+Open-closed PRINCIPLE:
+Accordig to OCP a class should be open to extension and closed for modification.
+eg:
+consider a store which has standard discount. But for VIP customers there might be additional discounts. 
+In such situations rather than modifying the same code we can extend the existing one and call the discount class with appropriate discount value.
+
+Without OCP: if we need to add new discount we need to alter the give_discount method which is not OCP principle which voilates closed for modification
+class Discount:
+  def __init__(self, customer, price):
+      self.customer = customer
+      self.price = price
+  def give_discount(self):
+      if self.customer == 'fav':
+          return self.price * 0.2
+      if self.customer == 'vip':
+          return self.price * 0.4
+
+
+With OCP: Now with below code no need to change the give_discount method we can just inherit class to New class and alter the discounts.
+class Discount:
+    def __init__(self, customer, price):
+      self.customer = customer
+      self.price = price
+    def get_discount(self):
+      return self.price * 0.2
+class VIPDiscount(Discount):
+    def get_discount(self):
+      return super().get_discount() * 2
+
+
+
+Liskov Substitution Principle:
+Let q(x) be a property provable about objects of x of type T. Then q(y) should be provable for objects y of type S where S is a subtype of T.
+eg: If there is a method which accepts class and performs a function, 
+then the subclasses inheritted from the same parent calss also should work without creating error.
+
+class BirdFly:
+    def fly(self):
+        print('I can fly')
+
+class Ostritch(BirdFly):
+    def fly(self):
+        raise Exception('I cannot fly')
+
+class crow(BirdFly):
+    pass
+
+def makeBirdFly(bird):
+    bird.fly()
+
+
+crow = crow()
+Ost = Ostritch()
+makeBirdFly(crow)
+makeBirdFly(Ost)
+
+As per LSP:
+class BirdSwim:
+    def swim(self):
+        print('I can swim')
+
+class BirdFly:
+    def fly(self):
+        print('I can fly')
+
+class Penguin(BirdSwim):
+    def fly(self):
+        raise Exception('I cannot fly')
+
+class crow(BirdFly):
+    pass
+
+def makeBirdFly(bird):
+    bird.fly()
+
+def makeBirdSwim(bird):
+    bird.swim()
+
+
+crow = crow()
+peng = Penguin()
+makeBirdFly(crow)
+makeBirdSwim(peng)
+
+
+I - Interface Segregation Principle:
+a client should never be forced to implement an interface that it doesn’t use, or clients shouldn’t be forced to depend on methods they do not use
+
+we can acheive this in python using abstract method
+
+from abc import ABC, abstractmethod
+class Shape(ABC):
+
+    @abstractmethod
+    def volume(self):
+        pass
+
+    @abstractmethod
+    def area(self):
+        pass
+
+class circle(Shape):
+    def __init__(self, s):
+        self.a = s
+
+    def volume(self):
+        print('volume is so and so')
+
+    def area(self):
+        print('Area is so and so')
+
+class Rectangle(Shape):
+    def __init__(self, l , b):
+        self.l = l
+        self.b = b
+
+    def area(self):
+        print('area is so and so')
+
+    # def volume(self):
+    #     print('volume is so and so')
+
+
+cir = circle(5)
+rect = Rectangle(3, 6)
+
+
+
+
+
+D - Dependency Inversion Principle:
+
+
+class Bread():
+    def bake(self):
+        print(' I am baking ')
+
+
+class Cookies():
+    def bake(self):
+        print(' I am doing cookies ')
+
+
+
+def cook(bak):
+    if isinstance(bak, Bread):
+        Bread().bake()
+    if isinstance(bak, Cookies):
+        Cookies().bake()
+
+bread = Bread()
+cook(bread)
+cookies = Cookies()
+cook(cookies)
+
+
+
+
+
+
+from abc import ABC, abstractmethod
+class Bakable(ABC):
+
+    @abstractmethod
+    def bake(self):
+        pass
+
+
+class Bread(Bakable):
+    def bake(self):
+        print(' I am baking ')
+
+
+class Cookies(Bakable):
+    def bake(self):
+        print(' I am doing cookies ')
+
+
+
+def cook(bak:Bakable):
+    bak.bake()
+
+bread = Bread()
+cook(bread)
+cookies = Cookies()
+cook(cookies)
