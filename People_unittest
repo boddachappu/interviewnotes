@@ -1,0 +1,89 @@
+"""
+reference : https://www.youtube.com/watch?v=B1j6k2j2eJg
+"""
+
+import unittest
+from dataclasses import dataclass
+
+
+NAME: str = "Arjan"
+EMPLOYEE_ID: int = 12345
+
+@dataclass
+class Employee:
+    """Basic representation of an employee."""
+
+    name: str
+    employee_id: int
+    pay_rate: float = 100.0
+    hours_worked: float = 0.0
+    employer_cost: float = 1000.0
+    has_commission: bool = True
+    commission: float = 100.0
+    contracts_landed: int = 0
+
+
+    def compute_payout(self) -> float:
+        """Compute how much the employee should be paid."""
+        payout = self.pay_rate * self.hours_worked + self.employer_cost
+        if self.has_commission:
+            payout += self.commission * self.contracts_landed
+        return payout
+
+
+
+class TestEmployeeComputePayout(unittest.TestCase):
+    """Test the compute_payout method of the Employee class."""
+
+    def setUp(self): #
+        """
+        Set up test fixtures.
+        we need to add the required objects which will be used for testing here.I
+        t will be called when each and every test method is executed.
+        In current code it will be called for 5 times
+        """
+        self.arjan = Employee(name=NAME, employee_id=EMPLOYEE_ID)
+
+    def test_employee_payout_returns_a_float(self): # Method name needs to be starting with test*
+        """Whether payout returns a float."""
+        self.assertIsInstance(self.arjan.compute_payout(), float)
+
+    def test_employee_payout_no_commission_no_hours(self):
+        """Whether payout is correctly computed in case of no commission and no hours worked."""
+        self.assertAlmostEqual(self.arjan.compute_payout(), 1000.0)
+
+    def test_employee_payout_no_commission(self):
+        """Whether payout is correctly computed in case of no commission and 10 hours worked."""
+        self.arjan.hours_worked = 10.0
+        self.assertAlmostEqual(self.arjan.compute_payout(), 2000.0)
+
+    def test_employee_payout_with_commission(self):
+        """
+        Whether payout is correctly computed in case of
+        10 contracts landed and 10 hours worked.
+        """
+        self.arjan.hours_worked = 10.0
+        self.arjan.contracts_landed = 10
+        self.assertAlmostEqual(self.arjan.compute_payout(), 3000.0)
+
+    def test_employee_payout_commission_disabled(self):
+        """
+        Whether payout is correctly computed in case of
+        10 contracts landed and 10 hours worked,
+        but commission is disabled.
+        """
+        self.arjan.hours_worked = 10.0
+        self.arjan.contracts_landed = 10
+        self.arjan.has_commission = False
+        self.assertAlmostEqual(self.arjan.compute_payout(), 2000.0)
+
+    def tearDown(self):
+        """
+        Method used to close any opened objects in setUp method needs to be executed here
+        :return:
+        """
+        pass
+
+
+if __name__ == "__main__":
+    unittest.main()
