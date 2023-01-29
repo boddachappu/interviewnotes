@@ -1,0 +1,114 @@
+Using mutable objects as default argument values in python
+This must be done very carefully. The reason is the default values of the arguments are evaluated only once when the control reaches the function
+
+Definition for the first time. After that, the same values(or mutable objects) are referenced in the subsequent function calls. 
+Things will be much more clear with the example
+
+
+
+# mutable default argument values example using python list
+ 
+# itemName is the name of the item that we want to add to list
+# that is being passed, or if it is not passed then appending in
+# the default list
+ 
+def appendItem(itemName, itemList = []):
+    itemList.append(itemName)
+    return itemList
+ 
+ 
+print(appendItem('notebook'))
+print(appendItem('pencil'))
+print(appendItem('eraser'))
+Output
+['notebook']
+['notebook', 'pencil']
+['notebook', 'pencil', 'eraser']
+What you have expected if you assume that a new list is created in each function call when we don’t pass a list to it
+
+[‘notebook’]
+
+[‘pencil’]
+
+[‘eraser’]
+
+But as you can see in the actual output of the program every time the function is called, the same list is used, no new list is made on a new call. 
+
+Example using dictionary
+
+# mutable default argument values example using python dictionary
+ 
+# itemName is the name of item and quantity is the number of such
+# items are there
+ 
+ 
+def addItemToDictionary(itemName, quantity, itemList = {}):
+    itemList[itemName] = quantity
+    return itemList
+ 
+ 
+print(addItemToDictionary('notebook', 4))
+print(addItemToDictionary('pencil', 1))
+print(addItemToDictionary('eraser', 1))
+Output
+{'notebook': 4}
+{'notebook': 4, 'pencil': 1}
+{'notebook': 4, 'pencil': 1, 'eraser': 1}
+What you have expected if you assume that a new dictionary is created in each function call
+
+{‘notebook’: 4}
+
+{‘pencil’: 1}
+
+{‘eraser’: 1}
+
+But you can clearly see the actual output of the program is different and it indicates the use of the same dictionary in each subsequent call.
+
+The key takeaway here is we should avoid such scenarios.
+
+Best Practices
+Assign the default value as none and then check in the function if the expected list or dictionary argument is none or not.
+
+If it is none then assign it with a list or dictionary depending on your requirement.
+
+
+# using None as values of the default arguments
+ 
+print('#list')
+def appendItem(itemName, itemList=None):
+    if itemList == None:
+          itemList = []
+    itemList.append(itemName)
+    return itemList
+ 
+ 
+print(appendItem('notebook'))
+print(appendItem('pencil'))
+print(appendItem('eraser'))
+ 
+ 
+# using None as value of default parameter
+ 
+print('\n\n#dictionary')
+def addItemToDictionary(itemName, quantity, itemList = None):
+    if itemList == None:
+        itemList = {}
+    itemList[itemName] = quantity
+    return itemList
+ 
+ 
+print(addItemToDictionary('notebook', 4))
+print(addItemToDictionary('pencil', 1))
+print(addItemToDictionary('eraser', 1))
+Output
+#list
+['notebook']
+['pencil']
+['eraser']
+
+
+#dictionary
+{'notebook': 4}
+{'pencil': 1}
+{'eraser': 1}
+Here you can clearly see that every time a function is called and a list or dictionary is not passed as an argument to the function then it creates a new list or dictionary.
